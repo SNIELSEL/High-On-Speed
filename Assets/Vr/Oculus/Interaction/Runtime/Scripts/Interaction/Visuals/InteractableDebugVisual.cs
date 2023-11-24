@@ -26,6 +26,9 @@ namespace Oculus.Interaction
 {
     public class InteractableDebugVisual : MonoBehaviour
     {
+        public GameObject spawnObject;
+        public Transform spawnLocation;
+
         [SerializeField, Interface(typeof(IInteractableView))]
         private UnityEngine.Object _interactableView;
 
@@ -154,6 +157,7 @@ namespace Oculus.Interaction
                     break;
                 case InteractableState.Select:
                     _material.color = _selectColor;
+                    Instantiate(spawnObject,spawnLocation);
                     break;
                 case InteractableState.Disabled:
                     _material.color = _disabledColor;
