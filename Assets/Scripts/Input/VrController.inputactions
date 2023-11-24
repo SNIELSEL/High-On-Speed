@@ -1,0 +1,105 @@
+{
+    "name": "VrController",
+    "maps": [
+        {
+            "name": "Ocules",
+            "id": "bbf3e5a8-a09d-4402-858c-11a6c7021284",
+            "actions": [
+                {
+                    "name": "Gas",
+                    "type": "Value",
+                    "id": "4c84cea7-2d9e-4ba6-8b4f-f5f6353d1c19",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Brake",
+                    "type": "Value",
+                    "id": "a695d427-6745-4461-a30b-9e3b65813eb5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "GearBox",
+                    "type": "Button",
+                    "id": "ae4a945f-0ac4-4c2e-b70f-2f3331fd6447",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Steering",
+                    "type": "Button",
+                    "id": "942587d2-e5e4-463c-8482-27d6ab1777c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2b0a71cb-1cc9-4d2b-a3fa-c47f9ea76890",
+                    "path": "<OculusTouchController>{RightHand}/{PrimaryTrigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6bba687-37d9-41b6-8c54-2cc35cd30a71",
+                    "path": "<OculusTouchController>{LeftHand}/{PrimaryTrigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afc65abb-7535-4ce7-a6ab-709e099dddc5",
+                    "path": "<OculusTouchController>{RightHand}/{SecondaryTrigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b86e7074-8943-4f38-8710-8b15d6f214bb",
+                    "path": "<OculusTouchController>{LeftHand}/{SecondaryTrigger}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29148ee8-380e-4f3c-9097-2f5cad310882",
+                    "path": "<OculusTouchController>{RightHand}/thumbstickTouched",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
