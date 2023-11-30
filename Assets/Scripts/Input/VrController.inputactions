@@ -2,7 +2,7 @@
     "name": "VrController",
     "maps": [
         {
-            "name": "Ocules",
+            "name": "Oculus",
             "id": "bbf3e5a8-a09d-4402-858c-11a6c7021284",
             "actions": [
                 {
@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "Steering",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "942587d2-e5e4-463c-8482-27d6ab1777c9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -91,6 +91,105 @@
                     "name": "",
                     "id": "29148ee8-380e-4f3c-9097-2f5cad310882",
                     "path": "<OculusTouchController>{RightHand}/thumbstickTouched",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Controller",
+            "id": "bf7c8043-051d-40e1-abeb-2bd712d3d910",
+            "actions": [
+                {
+                    "name": "Gas",
+                    "type": "Value",
+                    "id": "9ec29eda-857c-41d9-8c5d-70e652b3ecf1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Brake",
+                    "type": "Value",
+                    "id": "a9e367d3-444a-4620-abbf-8c0d04403216",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "GearBox",
+                    "type": "Button",
+                    "id": "14d6e377-4e20-4d1e-aff4-08190955a03d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Steering",
+                    "type": "Value",
+                    "id": "43d73758-146e-43a4-b5e7-35b029e39013",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3ab196f6-cba1-4ab8-8d6e-3302909c0667",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "173ab8b6-0bce-49ce-b781-e0d19f574c49",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12380dfc-d843-44f2-8738-194473f1f331",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3af95f7-c3f5-4da6-94d7-f333133d84d9",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearBox",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "feaf9496-c326-47a1-bc2b-55dda21a548b",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
