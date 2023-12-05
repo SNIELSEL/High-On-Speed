@@ -79,7 +79,7 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e6bba687-37d9-41b6-8c54-2cc35cd30a71"",
-                    ""path"": ""<OculusTouchController>{LeftHand}/{PrimaryTrigger}"",
+                    ""path"": ""<XRController>{LeftHand}/{PrimaryTrigger}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -211,7 +211,7 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""feaf9496-c326-47a1-bc2b-55dda21a548b"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
