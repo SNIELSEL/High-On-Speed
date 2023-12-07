@@ -19,6 +19,14 @@ public class HoverExit : MonoBehaviour
 
     private void OnDisable()
     {
-        currentCollider.onExit.Invoke();
+        if(currentCollider != null)
+        {
+            currentCollider.ToggleMenu();
+
+            if (currentCollider.onExit != null)
+            {
+                currentCollider.onExit.Invoke();
+            }
+        }
     }
 }

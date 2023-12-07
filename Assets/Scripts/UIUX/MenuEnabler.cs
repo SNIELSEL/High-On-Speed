@@ -12,7 +12,7 @@ public class MenuEnabler : MonoBehaviour
 
     public void Start()
     {
-        menuInput = inputActions.FindActionMap("XRI LeftHand").FindAction("Menu");
+        //menuInput = inputActions.FindActionMap("XRI LeftHand").FindAction("Menu");
         menuInput.Enable();
         menuInput.performed += ToggleMenu;
     }
