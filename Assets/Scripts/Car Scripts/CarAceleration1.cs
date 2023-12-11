@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarAceleration : MonoBehaviour
+public class OldCarAceleration : MonoBehaviour
 {
     [Header("Wheel Colliders")]
 
@@ -29,6 +29,11 @@ public class CarAceleration : MonoBehaviour
     private float currentAccelarationForce = 0f;
     private float currentBrakeForce = 0f;
     private float currentTurnAngle = 0f;
+    private float beginSpeedMultiplier;
+    private float beginSpeedBoostDuration;
+    private float beginPenaltyDuration;
+    private bool isBoosting;
+    private bool penaltyActive;
     private float convertedAccelarationForce;
 
     [Header("Steering")]
@@ -58,6 +63,9 @@ public class CarAceleration : MonoBehaviour
 
     void Start()
     {
+        beginSpeedBoostDuration = speedBoostDuration;
+        beginSpeedMultiplier = speedMultiplier;
+
         // devides the gear speed so it matchs the devided accelaration force
         for (int i = 0; i < gearSpeedAmount.Length; i++)
         {
@@ -79,10 +87,36 @@ public class CarAceleration : MonoBehaviour
 
     private void Update()
     {
-        // makes it so thet when your at the maximal gear it shows you are in the maximal gear
-        if(gear > maximalGear) 
+        if (speedPenaltyDuration >= 0 && penaltyActive)
         {
-            gear = maximalGear;
+            speedMultiplier *= gearSpeedPenalty * uiSpeedDevider * Time.deltaTime;
+        }
+        else
+        {
+            penaltyActive= false;
+            speedPenaltyDuration = beginPenaltyDuration;
+        }
+
+        if (speedBoostDuration >= 0 && isBoosting)
+        {
+            speedMultiplier *= gearSpeedBoost * uiSpeedDevider * Time.deltaTime;
+        }
+        else
+        {
+            isBoosting= false;
+            speedBoostDuration = beginSpeedBoostDuration;
+        }
+
+        if (isBoosting)
+        {
+            // makes a timer by lowering the speed boost duration by one each second
+            speedBoostDuration -= Time.deltaTime;
+        }
+
+        if(penaltyActive)
+        {
+            // makes a timer by lowering the speed penalty duration by one each second
+            speedPenaltyDuration -= Time.deltaTime;
         }
 
         // devide's the accelaration force so it looks better for the numbers of UI
@@ -95,6 +129,12 @@ public class CarAceleration : MonoBehaviour
 
         // runs the code in void AutomatedGearbox
         AutomatedGearbox();
+
+        // runs the code in the void ManualGearbox
+        if(manualGearShifting)
+        {
+            ManualGearbox();
+        }
     }
 
     void FixedUpdate()
@@ -161,41 +201,61 @@ public class CarAceleration : MonoBehaviour
     // automated Gear shifting
     private void AutomatedGearbox()
     {
-        // makes it so the auto gearbox goes up ga gear every time you are at the maximal speed amount of said gear
-        if (accelarationForce >= gearSpeedAmount[gear])
-        {
-            accelarationForce = gearSpeedAmount[gear];
-        }
-
-        if (gear != 0 && gear <= maximalGear)
-        {
-            if (accelarationForce >= 0 && accelarationForce < gearSpeedAmount[gear])
-            {
-                //als je tevroeg schakelen
-                //accelarationForce -= speedMultiplier * uiSpeedDevider;
-            }
-        }
-
         // this section is for automated gear shifting going up
-        if (automatedGearShifting == true && accelarationForce >= gearSpeedAmount[gear] && gear < maximalGear)
+        if (automatedGearShifting == true && accelarationForce >= gearSpeedAmount[gear] && gear <= maximalGear)
         {
             gear += 1;
         }
 
         // this section is for automated gear shifting going down
-        if (automatedGearShifting == true && accelarationForce <=  gearSpeedAmount[gear] && gear > minimalGear)
+        if (automatedGearShifting == true && accelarationForce <=  gearSpeedAmount[gear- 1] && gear > minimalGear)
         {
             gear -= 1;
         }
     }
 
+    // manual gear shifting
+    private void ManualGearbox()
+    {
+/*        // makes sure you cant go higher in speed that your current gear allows
+        if (accelarationForce >= gearSpeedAmount[gear])
+        {
+            accelarationForce = gearSpeedAmount[gear];
+        }
+
+        if (accelarationForce < gearSpeedAmount[gear -1] && gear != 0)
+        {
+            accelarationForce -= speedMultiplier * uiSpeedDevider;
+        }*/
+    }
 
     // a void created by the player input componed used to go up gear
     private void OnGearBoxUp()
     {
-        if (manualGearShifting == true && gear <= maximalGear)
+        if (manualGearShifting == true)
         {
-            gear += 1;
+        // makes it that when you shift up a gear and gives a speed boost if you shift at the right time
+            if (accelarationForce >= minimalGearBoostSpeedAmount[gear] && accelarationForce <= maximalGearBoostSpeedAmount[gear] && gear <= maximalGear)
+            {
+                gear += 1;
+
+                isBoosting= true;
+            }
+
+            // gives you a speed penalty if you shift to early or to late
+            else 
+            {
+                if (accelarationForce < minimalGearBoostSpeedAmount[gear] && gear <= maximalGear || accelarationForce > maximalGearBoostSpeedAmount[gear] && gear <= maximalGear)
+                {
+                    gear += 1;
+
+                    penaltyActive = true;
+
+                    accelarationForce -= gearSpeedPenalty * uiSpeedDevider;
+
+                }
+            }
+
         }
     }
 

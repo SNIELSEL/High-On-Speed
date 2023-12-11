@@ -145,9 +145,18 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""GearBox"",
+                    ""name"": ""GearBox Up"",
                     ""type"": ""Button"",
                     ""id"": ""14d6e377-4e20-4d1e-aff4-08190955a03d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GearBox Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""95072a95-93c3-4676-9c4f-b7593732977a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -188,34 +197,34 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""12380dfc-d843-44f2-8738-194473f1f331"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GearBox"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b3af95f7-c3f5-4da6-94d7-f333133d84d9"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GearBox"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""feaf9496-c326-47a1-bc2b-55dda21a548b"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Steering"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12380dfc-d843-44f2-8738-194473f1f331"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GearBox Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69d56906-547f-4034-b3b2-11e353a477b4"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GearBox Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -234,7 +243,8 @@ public partial class @VrController: IInputActionCollection2, IDisposable
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Gas = m_Controller.FindAction("Gas", throwIfNotFound: true);
         m_Controller_Brake = m_Controller.FindAction("Brake", throwIfNotFound: true);
-        m_Controller_GearBox = m_Controller.FindAction("GearBox", throwIfNotFound: true);
+        m_Controller_GearBoxUp = m_Controller.FindAction("GearBox Up", throwIfNotFound: true);
+        m_Controller_GearBoxDown = m_Controller.FindAction("GearBox Down", throwIfNotFound: true);
         m_Controller_Steering = m_Controller.FindAction("Steering", throwIfNotFound: true);
     }
 
@@ -369,7 +379,8 @@ public partial class @VrController: IInputActionCollection2, IDisposable
     private List<IControllerActions> m_ControllerActionsCallbackInterfaces = new List<IControllerActions>();
     private readonly InputAction m_Controller_Gas;
     private readonly InputAction m_Controller_Brake;
-    private readonly InputAction m_Controller_GearBox;
+    private readonly InputAction m_Controller_GearBoxUp;
+    private readonly InputAction m_Controller_GearBoxDown;
     private readonly InputAction m_Controller_Steering;
     public struct ControllerActions
     {
@@ -377,7 +388,8 @@ public partial class @VrController: IInputActionCollection2, IDisposable
         public ControllerActions(@VrController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Gas => m_Wrapper.m_Controller_Gas;
         public InputAction @Brake => m_Wrapper.m_Controller_Brake;
-        public InputAction @GearBox => m_Wrapper.m_Controller_GearBox;
+        public InputAction @GearBoxUp => m_Wrapper.m_Controller_GearBoxUp;
+        public InputAction @GearBoxDown => m_Wrapper.m_Controller_GearBoxDown;
         public InputAction @Steering => m_Wrapper.m_Controller_Steering;
         public InputActionMap Get() { return m_Wrapper.m_Controller; }
         public void Enable() { Get().Enable(); }
@@ -394,9 +406,12 @@ public partial class @VrController: IInputActionCollection2, IDisposable
             @Brake.started += instance.OnBrake;
             @Brake.performed += instance.OnBrake;
             @Brake.canceled += instance.OnBrake;
-            @GearBox.started += instance.OnGearBox;
-            @GearBox.performed += instance.OnGearBox;
-            @GearBox.canceled += instance.OnGearBox;
+            @GearBoxUp.started += instance.OnGearBoxUp;
+            @GearBoxUp.performed += instance.OnGearBoxUp;
+            @GearBoxUp.canceled += instance.OnGearBoxUp;
+            @GearBoxDown.started += instance.OnGearBoxDown;
+            @GearBoxDown.performed += instance.OnGearBoxDown;
+            @GearBoxDown.canceled += instance.OnGearBoxDown;
             @Steering.started += instance.OnSteering;
             @Steering.performed += instance.OnSteering;
             @Steering.canceled += instance.OnSteering;
@@ -410,9 +425,12 @@ public partial class @VrController: IInputActionCollection2, IDisposable
             @Brake.started -= instance.OnBrake;
             @Brake.performed -= instance.OnBrake;
             @Brake.canceled -= instance.OnBrake;
-            @GearBox.started -= instance.OnGearBox;
-            @GearBox.performed -= instance.OnGearBox;
-            @GearBox.canceled -= instance.OnGearBox;
+            @GearBoxUp.started -= instance.OnGearBoxUp;
+            @GearBoxUp.performed -= instance.OnGearBoxUp;
+            @GearBoxUp.canceled -= instance.OnGearBoxUp;
+            @GearBoxDown.started -= instance.OnGearBoxDown;
+            @GearBoxDown.performed -= instance.OnGearBoxDown;
+            @GearBoxDown.canceled -= instance.OnGearBoxDown;
             @Steering.started -= instance.OnSteering;
             @Steering.performed -= instance.OnSteering;
             @Steering.canceled -= instance.OnSteering;
@@ -444,7 +462,8 @@ public partial class @VrController: IInputActionCollection2, IDisposable
     {
         void OnGas(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
-        void OnGearBox(InputAction.CallbackContext context);
+        void OnGearBoxUp(InputAction.CallbackContext context);
+        void OnGearBoxDown(InputAction.CallbackContext context);
         void OnSteering(InputAction.CallbackContext context);
     }
 }

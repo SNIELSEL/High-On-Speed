@@ -123,9 +123,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "GearBox",
+                    "name": "GearBox Up",
                     "type": "Button",
                     "id": "14d6e377-4e20-4d1e-aff4-08190955a03d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GearBox Down",
+                    "type": "Button",
+                    "id": "95072a95-93c3-4676-9c4f-b7593732977a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -166,34 +175,34 @@
                 },
                 {
                     "name": "",
-                    "id": "12380dfc-d843-44f2-8738-194473f1f331",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GearBox",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b3af95f7-c3f5-4da6-94d7-f333133d84d9",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GearBox",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "feaf9496-c326-47a1-bc2b-55dda21a548b",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12380dfc-d843-44f2-8738-194473f1f331",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearBox Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69d56906-547f-4034-b3b2-11e353a477b4",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GearBox Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
