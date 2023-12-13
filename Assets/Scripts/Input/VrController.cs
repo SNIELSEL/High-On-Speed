@@ -24,105 +24,6 @@ public partial class @VrController: IInputActionCollection2, IDisposable
     ""name"": ""VrController"",
     ""maps"": [
         {
-            ""name"": ""Oculus"",
-            ""id"": ""bbf3e5a8-a09d-4402-858c-11a6c7021284"",
-            ""actions"": [
-                {
-                    ""name"": ""Gas"",
-                    ""type"": ""Value"",
-                    ""id"": ""4c84cea7-2d9e-4ba6-8b4f-f5f6353d1c19"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Brake"",
-                    ""type"": ""Value"",
-                    ""id"": ""a695d427-6745-4461-a30b-9e3b65813eb5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""GearBox"",
-                    ""type"": ""Button"",
-                    ""id"": ""ae4a945f-0ac4-4c2e-b70f-2f3331fd6447"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Steering"",
-                    ""type"": ""Value"",
-                    ""id"": ""942587d2-e5e4-463c-8482-27d6ab1777c9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""2b0a71cb-1cc9-4d2b-a3fa-c47f9ea76890"",
-                    ""path"": ""<OculusTouchController>{RightHand}/{PrimaryTrigger}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Gas"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e6bba687-37d9-41b6-8c54-2cc35cd30a71"",
-                    ""path"": ""<XRController>{LeftHand}/{PrimaryTrigger}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Brake"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""afc65abb-7535-4ce7-a6ab-709e099dddc5"",
-                    ""path"": ""<OculusTouchController>{RightHand}/{SecondaryTrigger}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GearBox"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b86e7074-8943-4f38-8710-8b15d6f214bb"",
-                    ""path"": ""<OculusTouchController>{LeftHand}/{SecondaryTrigger}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GearBox"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""29148ee8-380e-4f3c-9097-2f5cad310882"",
-                    ""path"": ""<OculusTouchController>{RightHand}/thumbstickTouched"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Steering"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Controller"",
             ""id"": ""bf7c8043-051d-40e1-abeb-2bd712d3d910"",
             ""actions"": [
@@ -186,8 +87,30 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""72d46bfe-bd85-41fc-ab09-44e150fce9d8"",
+                    ""path"": ""<XRController>{RightHand}/{TriggerButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gas"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""173ab8b6-0bce-49ce-b781-e0d19f574c49"",
                     ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f45d7009-7f50-4556-b01a-82ef9c8a4e1d"",
+                    ""path"": ""<XRController>{LeftHand}/{TriggerButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -219,8 +142,30 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""67396092-e3bf-4206-b9f9-e28452ec9ce8"",
+                    ""path"": ""<XRController>{RightHand}/{GripButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GearBox Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""69d56906-547f-4034-b3b2-11e353a477b4"",
                     ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GearBox Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95f8cf6a-2cf1-49e2-8f3d-5e87b0c8fe6e"",
+                    ""path"": ""<XRController>{LeftHand}/{GripButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -233,12 +178,6 @@ public partial class @VrController: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Oculus
-        m_Oculus = asset.FindActionMap("Oculus", throwIfNotFound: true);
-        m_Oculus_Gas = m_Oculus.FindAction("Gas", throwIfNotFound: true);
-        m_Oculus_Brake = m_Oculus.FindAction("Brake", throwIfNotFound: true);
-        m_Oculus_GearBox = m_Oculus.FindAction("GearBox", throwIfNotFound: true);
-        m_Oculus_Steering = m_Oculus.FindAction("Steering", throwIfNotFound: true);
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_Gas = m_Controller.FindAction("Gas", throwIfNotFound: true);
@@ -303,76 +242,6 @@ public partial class @VrController: IInputActionCollection2, IDisposable
     {
         return asset.FindBinding(bindingMask, out action);
     }
-
-    // Oculus
-    private readonly InputActionMap m_Oculus;
-    private List<IOculusActions> m_OculusActionsCallbackInterfaces = new List<IOculusActions>();
-    private readonly InputAction m_Oculus_Gas;
-    private readonly InputAction m_Oculus_Brake;
-    private readonly InputAction m_Oculus_GearBox;
-    private readonly InputAction m_Oculus_Steering;
-    public struct OculusActions
-    {
-        private @VrController m_Wrapper;
-        public OculusActions(@VrController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Gas => m_Wrapper.m_Oculus_Gas;
-        public InputAction @Brake => m_Wrapper.m_Oculus_Brake;
-        public InputAction @GearBox => m_Wrapper.m_Oculus_GearBox;
-        public InputAction @Steering => m_Wrapper.m_Oculus_Steering;
-        public InputActionMap Get() { return m_Wrapper.m_Oculus; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(OculusActions set) { return set.Get(); }
-        public void AddCallbacks(IOculusActions instance)
-        {
-            if (instance == null || m_Wrapper.m_OculusActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_OculusActionsCallbackInterfaces.Add(instance);
-            @Gas.started += instance.OnGas;
-            @Gas.performed += instance.OnGas;
-            @Gas.canceled += instance.OnGas;
-            @Brake.started += instance.OnBrake;
-            @Brake.performed += instance.OnBrake;
-            @Brake.canceled += instance.OnBrake;
-            @GearBox.started += instance.OnGearBox;
-            @GearBox.performed += instance.OnGearBox;
-            @GearBox.canceled += instance.OnGearBox;
-            @Steering.started += instance.OnSteering;
-            @Steering.performed += instance.OnSteering;
-            @Steering.canceled += instance.OnSteering;
-        }
-
-        private void UnregisterCallbacks(IOculusActions instance)
-        {
-            @Gas.started -= instance.OnGas;
-            @Gas.performed -= instance.OnGas;
-            @Gas.canceled -= instance.OnGas;
-            @Brake.started -= instance.OnBrake;
-            @Brake.performed -= instance.OnBrake;
-            @Brake.canceled -= instance.OnBrake;
-            @GearBox.started -= instance.OnGearBox;
-            @GearBox.performed -= instance.OnGearBox;
-            @GearBox.canceled -= instance.OnGearBox;
-            @Steering.started -= instance.OnSteering;
-            @Steering.performed -= instance.OnSteering;
-            @Steering.canceled -= instance.OnSteering;
-        }
-
-        public void RemoveCallbacks(IOculusActions instance)
-        {
-            if (m_Wrapper.m_OculusActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IOculusActions instance)
-        {
-            foreach (var item in m_Wrapper.m_OculusActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_OculusActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public OculusActions @Oculus => new OculusActions(this);
 
     // Controller
     private readonly InputActionMap m_Controller;
@@ -451,13 +320,6 @@ public partial class @VrController: IInputActionCollection2, IDisposable
         }
     }
     public ControllerActions @Controller => new ControllerActions(this);
-    public interface IOculusActions
-    {
-        void OnGas(InputAction.CallbackContext context);
-        void OnBrake(InputAction.CallbackContext context);
-        void OnGearBox(InputAction.CallbackContext context);
-        void OnSteering(InputAction.CallbackContext context);
-    }
     public interface IControllerActions
     {
         void OnGas(InputAction.CallbackContext context);
