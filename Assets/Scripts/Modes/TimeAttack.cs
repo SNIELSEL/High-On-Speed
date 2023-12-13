@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TimeAttack : MonoBehaviour
 {
-    private float lapTime;
+    [SerializeField] private float lapTime;
 
     private bool lapStarted;
     private bool lapFinished;
@@ -21,6 +21,8 @@ public class TimeAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lapTimeUI.text = lapTime.ToString();
+
         //runs the code in the void timer
         Timer();
     }
@@ -30,7 +32,7 @@ public class TimeAttack : MonoBehaviour
         // makes the timer go up if you have started a lap
         if (lapStarted == true)
         {
-            lapTime += Time.deltaTime;
+            lapTime += 1 * Time.deltaTime;
         }
 
         if (lapFinished == true)
@@ -41,15 +43,26 @@ public class TimeAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider enter)
     {
-        lapFinished = true;
-        lapStarted = false;
+        if (gameObject.tag == ("StartFinish"))
+        {
+            lapFinished = true;
+            lapStarted = false;
+
+            Debug.Log("End Lap");
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider exit)
     {
-        lapStarted = true;
-        lapFinished = false;
+
+        if (gameObject.tag == ("StartFinish"))
+        {
+            lapFinished = false;
+            lapStarted = true;
+
+            Debug.Log("Start Lap");
+        }
     }
 }

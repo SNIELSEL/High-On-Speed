@@ -7,6 +7,7 @@ TagManager:
   - SamplesInfoPanel
   - Car
   - VideoPlayer
+  - StartFinish
   layers:
   - Default
   - TransparentFX
