@@ -30,6 +30,8 @@ public class CarAceleration : MonoBehaviour
     private float currentBrakeForce = 0f;
     private float currentTurnAngle = 0f;
     private float convertedAccelarationForce;
+    private float startTurnInput;
+    public float steeringSpeedDivider;
 
     [Header("Steering")]
 
@@ -58,6 +60,8 @@ public class CarAceleration : MonoBehaviour
 
     void Start()
     {
+        startTurnInput = maximalTurnAngle;
+
         // devides the gear speed so it matchs the devided accelaration force
         for (int i = 0; i < gearSpeedAmount.Length; i++)
         {
@@ -79,6 +83,8 @@ public class CarAceleration : MonoBehaviour
 
     private void Update()
     {
+        maximalTurnAngle = startTurnInput - (accelarationForce / steeringSpeedDivider);
+
         // makes it so thet when your at the maximal gear it shows you are in the maximal gear
         if(gear > maximalGear) 
         {
