@@ -10,6 +10,8 @@ public class VideoDisabler : MonoBehaviour
     public VideoPlayer[] vids;
     public GameObject[] videoPlayerObjects;
 
+    public GameObject rayCaster;
+
     [NonSerialized]
     public PlayVideoOnHover playVideoOnHover;
 

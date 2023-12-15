@@ -35,6 +35,9 @@ public class PlayVideoOnHover : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        videoDisabler.rayCaster.SetActive(false);
+        videoDisabler.rayCaster.SetActive(true);
+
         videoDisabler.playVideoOnHover = this;
         triggerInput.Enable();
         triggerInput.performed += videoDisabler.ToggleMenu;
