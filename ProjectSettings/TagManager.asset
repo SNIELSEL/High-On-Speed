@@ -8,6 +8,9 @@ TagManager:
   - Car
   - VideoPlayer
   - StartFinish
+  - EndOfSector1
+  - EndOfSector2
+  - EndOfSector3
   layers:
   - Default
   - TransparentFX

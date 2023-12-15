@@ -12,6 +12,13 @@ public class CarAceleration : MonoBehaviour
     [SerializeField] WheelCollider rearRight;
     [SerializeField] WheelCollider rearLeft;
 
+    [Header("Tire Transforms")]
+
+    [SerializeField] Transform frontRightTireTransform;
+    [SerializeField] Transform frontLeftTireTransform;
+    [SerializeField] Transform rearRightTireTransform;
+    [SerializeField] Transform rearLeftTireTransform;
+
     [Header("Accelaration and Decelaration")]
 
     [SerializeField] private float accelarationForce;
@@ -25,13 +32,6 @@ public class CarAceleration : MonoBehaviour
     [SerializeField] private float gearSpeedPenalty;
     [SerializeField] private float speedBoostDuration;
     [SerializeField] private float speedPenaltyDuration;
-
-    private float currentAccelarationForce = 0f;
-    private float currentBrakeForce = 0f;
-    private float currentTurnAngle = 0f;
-    private float convertedAccelarationForce;
-    private float startTurnInput;
-    public float steeringSpeedDivider;
 
     [Header("Steering")]
 
@@ -57,6 +57,17 @@ public class CarAceleration : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI showGear;
     [SerializeField] private TextMeshProUGUI showSpeed;
+
+    private float currentAccelarationForce = 0f;
+    private float currentBrakeForce = 0f;
+    private float convertedAccelarationForce;
+
+    private float currentTurnAngle = 0f;
+    private float startTurnInput;
+    public float steeringSpeedDivider;
+
+    private Vector3 wheelPosition;
+    private Quaternion wheelRotation;
 
     void Start()
     {
@@ -160,9 +171,25 @@ public class CarAceleration : MonoBehaviour
         currentTurnAngle = maximalTurnAngle * turnInput;
         frontLeft.steerAngle = currentTurnAngle;
         frontRight.steerAngle = currentTurnAngle;
+
+        // makes the wheel mashes rotate and turn along side the wheel colliders
+        WheelTransform(frontRight, frontRightTireTransform);
+        WheelTransform(frontLeft, frontLeftTireTransform);
+        WheelTransform(rearRight, rearRightTireTransform);
+        WheelTransform(rearLeft, rearLeftTireTransform);
+
     }
 
-    // handels every gear of the car's gearbox
+    //sets the wheels position and rotation tho that of the weheel collider
+    private void WheelTransform(WheelCollider wheelCollider, Transform tireTransforms)
+    {
+        // getting the state of the collider
+        wheelCollider.GetWorldPose(out wheelPosition, out wheelRotation);
+
+        // gating the state of the transform
+        tireTransforms.position = wheelPosition;
+        tireTransforms.rotation = wheelRotation;
+    }
 
     // automated Gear shifting
     private void AutomatedGearbox()
