@@ -19,7 +19,6 @@ public class PlayVideoOnHover : MonoBehaviour
 
     private InputActionAsset inputActions;
 
-    [NonSerialized]
     public InputAction triggerInput;
 
     private void Awake()
@@ -31,6 +30,9 @@ public class PlayVideoOnHover : MonoBehaviour
         triggerInput = game.UI.Click;
 
         videoDisabler = GameObject.Find("Menu Manager").GetComponent<VideoDisabler>();
+
+        triggerInput.Enable();
+        triggerInput.performed += videoDisabler.ToggleMenu;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,8 +41,6 @@ public class PlayVideoOnHover : MonoBehaviour
         videoDisabler.rayCaster.SetActive(true);
 
         videoDisabler.playVideoOnHover = this;
-        triggerInput.Enable();
-        triggerInput.performed += videoDisabler.ToggleMenu;
 
         HoverExit.instance.currentCollider = GetComponent<PlayVideoOnHover>();
         videoDisabler.DisableAllVids();

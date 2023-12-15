@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Video;
+using static UnityEngine.Rendering.DebugUI;
 
 public class VideoDisabler : MonoBehaviour
 {
@@ -12,26 +13,41 @@ public class VideoDisabler : MonoBehaviour
 
     public GameObject rayCaster;
 
-    [NonSerialized]
     public PlayVideoOnHover playVideoOnHover;
 
     [NonSerialized]
     public bool uiClicked;
 
+    [NonSerialized]
+    public float triggerFloat;
+
+    private void OnClick(InputValue value)
+    {
+        triggerFloat = value.Get<float>();
+    }
+
     public void ToggleMenu(InputAction.CallbackContext context)
     {
-        if (playVideoOnHover.onTrigger != null && !uiClicked)
+        if (playVideoOnHover.onTrigger != null && triggerFloat <= 0.8f)
         {
-            uiClicked = true;
-
             playVideoOnHover.onTrigger.Invoke();
-
-            StartCoroutine(ClickDelay());
+            playVideoOnHover.triggerInput.Disable();
         }
     }
     public void Start()
     {
         ScanObjects();
+    }
+
+    public void Update()
+    {
+        if(triggerFloat == 0)
+        {
+            if(playVideoOnHover != null)
+            {
+                playVideoOnHover.triggerInput.Enable();
+            }
+        }
     }
 
     public void ScanObjects()
@@ -52,11 +68,5 @@ public class VideoDisabler : MonoBehaviour
         {
             vids[i].Pause();
         }
-    }
-
-    public IEnumerator ClickDelay()
-    {
-        yield return new WaitForSeconds(0.3f);
-        uiClicked = false;
     }
 }
