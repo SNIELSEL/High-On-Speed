@@ -55,12 +55,14 @@ public class OldCarAceleration : MonoBehaviour
     [SerializeField] private bool automatedGearShifting;
     [SerializeField] private bool SugestGear;
 
-
     [Header("Text Mesh Pro's")]
 
     [SerializeField] private TextMeshProUGUI showGear;
     [SerializeField] private TextMeshProUGUI showSpeed;
 
+    private Vector3 wheelPosition;
+    private Quaternion wheelRotation;
+  
     void Start()
     {
         beginSpeedBoostDuration = speedBoostDuration;
