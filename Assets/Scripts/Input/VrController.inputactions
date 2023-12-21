@@ -109,6 +109,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3db6253a-802b-4117-9ed5-7edf433f4e52",
+                    "path": "<XRController>{LeftHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "12380dfc-d843-44f2-8738-194473f1f331",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
