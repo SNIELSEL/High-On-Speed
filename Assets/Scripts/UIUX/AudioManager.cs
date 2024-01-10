@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioClip[] audioClips;
+    public string[] clipNames;
+    public void Awake()
     {
-        
-    }
+        clipNames = new string[audioClips.Length];
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < audioClips.Length; i++)
+        {
+            clipNames[i] = audioClips[i].name;
+        }
     }
 }
