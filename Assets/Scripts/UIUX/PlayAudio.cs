@@ -9,6 +9,7 @@ public class PlayAudio : MonoBehaviour
     private AudioManager audioManager;
 
     public bool playLock;
+    public bool playOnAwake;
 
     [HideInInspector]
     public int arrayIdx = 0;
@@ -20,10 +21,12 @@ public class PlayAudio : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
-    public void playAudio()
+    public void Start()
     {
-        audioSource.clip = audioManager.audioClips[arrayIdx];
-        audioSource.Play();
+        if (playOnAwake)
+        {
+            playAudio();
+        }
     }
 
     public void Update()
@@ -33,5 +36,10 @@ public class PlayAudio : MonoBehaviour
             playLock = false;
             playAudio();
         }
+    }
+    public void playAudio()
+    {
+        audioSource.clip = audioManager.audioClips[arrayIdx];
+        audioSource.Play();
     }
 }
