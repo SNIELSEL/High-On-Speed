@@ -167,7 +167,7 @@ public class CarAceleration : MonoBehaviour
         rearLeft.brakeTorque = currentBrakeForce;
 
         /*sets the max amount of degreas the wheel's are allowed to turn
-        and sets the steering to the front wheels whilest binmding it to the value of your left trigger*/
+        and sets the steering to the front wheels whilest binding it to the value of your left trigger*/
         currentTurnAngle = maximalTurnAngle * turnInput;
         frontLeft.steerAngle = currentTurnAngle;
         frontRight.steerAngle = currentTurnAngle;

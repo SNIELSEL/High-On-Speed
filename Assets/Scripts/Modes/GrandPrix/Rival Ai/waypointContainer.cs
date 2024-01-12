@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class waypointContainer : MonoBehaviour
+public class WayPointContainer : MonoBehaviour
 {
-    [SerializeField] private List<Transform> waypoints;
+    [SerializeField] private List<GameObject> waypoints;
     
     // makes it so that all the waypoints go into a list
     void Awake()
     {
-        foreach(Transform transform in GetComponentsInChildren<Transform>())
+        foreach(GameObject gameObject in GetComponentsInChildren<GameObject>())
         {
-            waypoints.Add(transform);
+            waypoints.Add(gameObject);
         }
         waypoints.Remove(waypoints[0]);
     }
