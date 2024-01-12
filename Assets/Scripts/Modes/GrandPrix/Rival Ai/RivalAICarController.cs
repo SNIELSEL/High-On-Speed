@@ -139,7 +139,7 @@ public class RivalAICarController : MonoBehaviour
 
         if (accelarationForce != 0 && accelarationForce <= maximalAccelarationForce)
         {
-            accelarationForce += Random.Range(0.5f, 1);
+            accelarationForce += UnityEngine.Random.Range(0.5f, 1);
         }
     }
 
