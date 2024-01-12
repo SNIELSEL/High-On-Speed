@@ -1,4 +1,5 @@
 using Meta.Voice.Audio;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,7 +43,7 @@ public class RivalAICarController : MonoBehaviour
 
     [Header("Bools")]
 
-    [SerializeField] private bool raceStart;
+    [SerializeField] public bool raceStart;
     [SerializeField] private bool inBrakeZone;
 
 
