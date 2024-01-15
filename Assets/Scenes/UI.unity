@@ -14724,7 +14724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2668463, g: 0.2668463, b: 0.2668463, a: 1}
+  m_Color: {r: 0.30458212, g: 0.30458212, b: 0.30458212, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17454,7 +17454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2668463, g: 0.2668463, b: 0.2668463, a: 1}
+  m_Color: {r: 0.30458212, g: 0.30458212, b: 0.30458212, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -44959,7 +44959,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   triggerInput:
-    m_Name: 
+    m_Name: Trigger Input
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 25eb5886-5635-4a4f-a4f6-ab2012a20f34
@@ -45956,7 +45956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2668463, g: 0.2668463, b: 0.2668463, a: 1}
+  m_Color: {r: 0.30458212, g: 0.30458212, b: 0.30458212, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -46606,7 +46606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2668463, g: 0.2668463, b: 0.2668463, a: 1}
+  m_Color: {r: 0.30458212, g: 0.30458212, b: 0.30458212, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -47764,6 +47764,7 @@ MonoBehaviour:
   - {fileID: 1202486517}
   - {fileID: 278064368}
   auioPlayer: {fileID: 1530628391}
+  controller: {fileID: 0}
 --- !u!82 &1530628391
 AudioSource:
   m_ObjectHideFlags: 0
@@ -53927,7 +53928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2668463, g: 0.2668463, b: 0.2668463, a: 1}
+  m_Color: {r: 0.30458212, g: 0.30458212, b: 0.30458212, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
