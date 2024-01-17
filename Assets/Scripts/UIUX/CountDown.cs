@@ -10,10 +10,13 @@ public class CountDown : MonoBehaviour
     private float randomStartTime;
 
     public RivalAICarController controller;
-
-    public void Start()
+    public bool beginCountDown;
+    public void Update()
     {
-        StartCountDown();
+        if (beginCountDown)
+        {
+            StartCountDown();
+        }
     }
 
     public void StartCountDown()

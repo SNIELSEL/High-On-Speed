@@ -18,6 +18,10 @@ public class TimeAttack : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentLapUi;
     [SerializeField] private TextMeshProUGUI bestLapUI;
 
+    [Header("Multiplayer")]
+    [SerializeField] private PlayFabManager multiplayer;
+
+    [Header("Debugging")]
     [SerializeField] private bool startRace;
     [SerializeField] private bool fillInArray;
 
@@ -176,6 +180,8 @@ public class TimeAttack : MonoBehaviour
         PlayerPrefs.SetInt("BestLap", bestLap);
         PlayerPrefs.SetInt("BestTimeMinute", bestLapMinutes);
         PlayerPrefs.SetFloat("BestTimeSeconds", bestTime);
+
+        multiplayer.SendLeaderBoard(bestLapMinutes + (int)bestTime + (int)bestLapDecimal);
     }
 
     public void LoadBestTime()
