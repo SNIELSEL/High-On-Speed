@@ -4,9 +4,12 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
+using System.Globalization;
 
 public class PlayFabManager : MonoBehaviour
 {
+    float _test, _test2;
+
     [Header("LeaderBoardNameStuff")]
 
     [Header("ScoreBoard")]
@@ -18,6 +21,7 @@ public class PlayFabManager : MonoBehaviour
 
     [Header("eventTriggersOrChecks")]
     public string playername;
+    private string lg;
 
     [Header("scripts")]
     public SaveAndLoad saveAndLoad;
@@ -25,6 +29,8 @@ public class PlayFabManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lg = CultureInfo.CurrentCulture.EnglishName;
+
         Login();
 
         saveAndLoad.LoadData();
@@ -55,9 +61,15 @@ public class PlayFabManager : MonoBehaviour
 
         if (playername == null || playername == SystemInfo.deviceUniqueIdentifier)
         {
-            saveAndLoad.SaveData();
+            ChangeName();
         }
+        else if (UnityEngine.XR.XRSettings.enabled && result.InfoResultPayload.PlayerProfile.DisplayName != Oculus.Platform.Users.GetLoggedInUser().ToString())
+        {
+            ChangeName();
+        }
+
         Debug.Log("Logged in Succesfully as " + SystemInfo.deviceUniqueIdentifier);
+        GetLeaderBoard();
     }
     void OnError(PlayFabError error)
     {
@@ -111,24 +123,53 @@ public class PlayFabManager : MonoBehaviour
 
             texts[0].text = (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
-            texts[2].text = item.StatValue.ToString();
+
+            _test = item.StatValue / 1000f;
+            Min();
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+            texts[2].text = _test2.ToString() + ":" + _test.ToString("F3");
 
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lg);
         }
     }
 
-    public void SubmitNameButton()
+    void Min()
     {
-        var request = new UpdateUserTitleDisplayNameRequest
+        if (_test > 100)
         {
-            DisplayName = Oculus.Platform.Users.GetLoggedInUser().ToString()
-        };
-        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+            _test2 += 1;
+            _test -= 100;
+
+            Min();
+        }
+    }
+
+    public void ChangeName()
+    {
+        if (UnityEngine.XR.XRSettings.enabled)
+        {
+            var request = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = Oculus.Platform.Users.GetLoggedInUser().ToString()
+            };
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+        }
+        else
+        {
+            var request = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = SystemInfo.deviceName
+            };
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+        }
     }
 
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
     {
-        saveAndLoad.SaveData();
+        Debug.Log("Updated diplay name to "+ result.DisplayName);
     }
 
     public void SetSelectedLeaderboardInt(int numberToSetIntsTo)

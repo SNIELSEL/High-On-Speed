@@ -5894,7 +5894,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 507988964}
-  - component: {fileID: 507988963}
+  - component: {fileID: 507988966}
+  - component: {fileID: 507988965}
   m_Layer: 0
   m_Name: Ui Manager
   m_TagString: Untagged
@@ -5902,30 +5903,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &507988963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 507988962}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65eea6666ab47654ba2ba9ddbfbbb280, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lapTime: 0
-  bestTime: 0
-  currentLapMinutes: 0
-  bestLapMinutes: 0
-  currentLap: 0
-  bestLap: 0
-  lapTimeUI: {fileID: 298204253}
-  bestLapTimeUI: {fileID: 0}
-  currentLapUi: {fileID: 0}
-  bestLapUI: {fileID: 0}
-  startRace: 1
-  carController: {fileID: 0}
 --- !u!4 &507988964
 Transform:
   m_ObjectHideFlags: 0
@@ -5942,6 +5919,39 @@ Transform:
   - {fileID: 1219598164}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &507988965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507988962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2f70014372b6f4d933254d7cee2048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slot: 0
+--- !u!114 &507988966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507988962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d419f0cac36144441bca25084b64aeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rowPrefab: {fileID: 0}
+  leaderboardlistTransforms: []
+  leaderboardNamesList:
+  - TimeTrial
+  currentSelectedLeaderboard: 0
+  currentLeaderboardToSendDataTo: 0
+  playername: 
+  saveAndLoad: {fileID: 507988965}
 --- !u!1 &518992045
 GameObject:
   m_ObjectHideFlags: 0
@@ -21068,11 +21078,14 @@ MonoBehaviour:
   bestLapMinutes: 0
   currentLap: 0
   bestLap: 0
+  times: []
   lapTimeUI: {fileID: 298204253}
   bestLapTimeUI: {fileID: 1127956765}
   currentLapUi: {fileID: 379611206}
   bestLapUI: {fileID: 1329854474}
+  multiplayer: {fileID: 507988966}
   startRace: 1
+  fillInArray: 0
   carController: {fileID: 0}
 --- !u!1001 &2146681532
 PrefabInstance:

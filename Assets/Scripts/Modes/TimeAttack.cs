@@ -32,6 +32,9 @@ public class TimeAttack : MonoBehaviour
 
     private float lapDecimal;
     private float bestLapDecimal;
+    private int convertedText;
+
+    private string convertedTime;
 
     public RivalAICarController carController;
 
@@ -181,7 +184,12 @@ public class TimeAttack : MonoBehaviour
         PlayerPrefs.SetInt("BestTimeMinute", bestLapMinutes);
         PlayerPrefs.SetFloat("BestTimeSeconds", bestTime);
 
-        multiplayer.SendLeaderBoard(bestLapMinutes + (int)bestTime + (int)bestLapDecimal);
+        convertedTime = bestLapMinutes.ToString("F0") + bestTime.ToString("F0") + bestLapDecimal.ToString("F0");
+        convertedText = int.Parse(convertedTime);
+
+        Debug.Log(convertedText);
+
+        multiplayer.SendLeaderBoard(convertedText);
     }
 
     public void LoadBestTime()
