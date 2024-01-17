@@ -11,6 +11,7 @@ TagManager:
   - EndOfSector1
   - EndOfSector2
   - EndOfSector3
+  - BrakingZone
   layers:
   - Default
   - TransparentFX
