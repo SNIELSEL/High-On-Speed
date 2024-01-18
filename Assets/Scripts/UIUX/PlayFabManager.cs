@@ -21,26 +21,40 @@ public class PlayFabManager : MonoBehaviour
 
     [Header("eventTriggersOrChecks")]
     public string playername;
-    private string lg;
 
     [Header("scripts")]
     public SaveAndLoad saveAndLoad;
 
+    //privates/debugging
+    public bool changeUser;
+    public string relogID;
+    private string customPlayerID;
+
     // Start is called before the first frame update
     void Start()
     {
-        lg = CultureInfo.CurrentCulture.EnglishName;
+        customPlayerID = SystemInfo.deviceUniqueIdentifier;
 
         Login();
 
         saveAndLoad.LoadData();
+    }
+    private void Update()
+    {
+        if (changeUser)
+        {
+            changeUser = false;
+            PlayFabClientAPI.ForgetAllCredentials();
+            customPlayerID = relogID;
+            Login();
+        }
     }
 
     void Login()
     {
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
+            CustomId = customPlayerID,
             CreateAccount = true,
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
             {
@@ -132,7 +146,7 @@ public class PlayFabManager : MonoBehaviour
             texts[2].text = _test2.ToString() + ":" + _test.ToString("F3");
 
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lg);
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("NL");
         }
     }
 
