@@ -83,7 +83,7 @@ public class PlayFabManager : MonoBehaviour
         }
 
         Debug.Log("Logged in Succesfully as " + SystemInfo.deviceUniqueIdentifier);
-        GetLeaderBoard();
+        //GetLeaderBoard();
     }
     void OnError(PlayFabError error)
     {

@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class TimeAttack : MonoBehaviour
 {
@@ -11,6 +14,7 @@ public class TimeAttack : MonoBehaviour
     [SerializeField] private int currentLap;
     [SerializeField] private int bestLap;
     [SerializeField] private string[] times;
+    [SerializeField] private float[] timesFloat;
 
     [Header("Text Mesh Pro's")]
     [SerializeField] private TextMeshProUGUI lapTimeUI;
@@ -33,8 +37,12 @@ public class TimeAttack : MonoBehaviour
     private float lapDecimal;
     private float bestLapDecimal;
     private int convertedText;
+    private int convertedMinute;
+    private int emptyArrays;
 
     private string convertedTime;
+
+    public List<float> sortedFloats;
 
     public RivalAICarController carController;
 
@@ -91,6 +99,11 @@ public class TimeAttack : MonoBehaviour
         {
             lapTimeUI.text = currentLapMinutes.ToString() + ":" + lapTime.ToString("F0") + "." + lapDecimal.ToString("F0");
         }
+
+        if(currentLap == 11)
+        {
+            fillInArray = true;
+        }
     }
 
     private void Timer()
@@ -117,8 +130,6 @@ public class TimeAttack : MonoBehaviour
         {
             lapFinished = true;
             lapStarted = false;
-
-            Debug.Log("End Lap " + currentLap);
         }
         else if (enter.tag == ("StartFinish") && firstLap)
         {
@@ -141,8 +152,6 @@ public class TimeAttack : MonoBehaviour
             currentLapUi.text = "Lap:" + currentLap.ToString();
 
             currentLapMinutes = 0;
-
-            Debug.Log("Start Lap " + currentLap);
         }
 
         Timer();
@@ -160,6 +169,7 @@ public class TimeAttack : MonoBehaviour
     public void SaveLap()
     {
         PlayerPrefs.SetString("Laptime" + currentLap, currentLapMinutes.ToString("F0") + ":" + lapTime.ToString("F0") + "." + lapDecimal.ToString("F0"));
+        PlayerPrefs.SetString("LaptimeFloat" + currentLap, currentLapMinutes.ToString("F0") + lapTime.ToString("F0") + lapDecimal.ToString("F0"));
     }
 
     public void SetBestTime()
@@ -186,8 +196,6 @@ public class TimeAttack : MonoBehaviour
 
         convertedTime = bestLapMinutes.ToString("F0") + bestTime.ToString("F0") + bestLapDecimal.ToString("F0");
         convertedText = int.Parse(convertedTime);
-
-        Debug.Log(convertedText);
 
         multiplayer.SendLeaderBoard(convertedText);
     }
@@ -222,12 +230,50 @@ public class TimeAttack : MonoBehaviour
 
     public void FinishedTimeTrial()
     {
+        emptyArrays = 0;
         Time.timeScale = 0;
 
-        times = new string[currentLap];
+        times = new string[currentLap - 1];
+        timesFloat = new float[currentLap -1];
         for (int i = 0; i < currentLap; i++)
         {
-            times[i] = PlayerPrefs.GetString("Laptime" + i.ToString());
+            if(i != 0)
+            {
+                emptyArrays = i - 1;
+            }
+
+            times[emptyArrays] = PlayerPrefs.GetString("Laptime" + i.ToString());
+
+            float.TryParse(PlayerPrefs.GetString("LaptimeFloat" + i.ToString()), out timesFloat[emptyArrays]);
+
+            timesFloat[emptyArrays] = timesFloat[emptyArrays] / 1000f;
+
+            Loop(i);
+
+            timesFloat[emptyArrays] = convertedMinute + timesFloat[emptyArrays];
+            
+
+
+            if(i != currentLap)
+            {
+                sortedFloats.Add(timesFloat[i]);
+            }
+            else
+            {
+                print("AAAAAAAAAAAAAAAAAAAH");
+                sortedFloats.Sort();
+            }
+        }
+    }
+
+    void Loop(int i)
+    {
+        if (timesFloat[emptyArrays] > 100)
+        {
+            timesFloat[emptyArrays] -= 100;
+            convertedMinute += 60;
+
+            Loop(i);
         }
     }
 }
