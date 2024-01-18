@@ -45,7 +45,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Sample/TransformerExamples.unity
     guid: 7475942f60c376744ba1ec487d140105
   - enabled: 1
-    path: Assets/Scenes/Main.unity
+    path: Assets/Scenes/GrandPrix.unity
     guid: fc8174d1c6ae8fe4492c560c4b8967aa
   - enabled: 1
     path: Assets/Scenes/TimeTrial.unity
