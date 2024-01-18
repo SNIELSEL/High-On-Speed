@@ -170,6 +170,7 @@ public class RivalAICarController : MonoBehaviour
             rearRightWheelCollider.brakeTorque = currentBrakeForce;
             rearLeftWheelCollider.brakeTorque = currentBrakeForce;
         }
+
         else
         {
             // If the car is not moving forward, reset brake torque
@@ -183,7 +184,7 @@ public class RivalAICarController : MonoBehaviour
         }
 
         // Reset acceleration force to a minimum value
-        accelarationForce = 1f;
+        accelarationForce = 60f;
     }
 
     private void GearBox()
