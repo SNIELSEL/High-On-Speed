@@ -885,10 +885,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a2112e8e5b9284bb4161856ef409c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontRightWheelCollider: {fileID: 0}
-  frontLeftWheelCollider: {fileID: 0}
-  rearRightWheelCollider: {fileID: 0}
-  rearLeftWheelCollider: {fileID: 0}
+  frontRightWheelCollider: {fileID: 5805242705753124086}
+  frontLeftWheelCollider: {fileID: 3897032448499596589}
+  rearRightWheelCollider: {fileID: 8035798454636352302}
+  rearLeftWheelCollider: {fileID: 8742782643767222042}
   frontRightTireTransform: {fileID: 6570005000074900816}
   frontLeftTireTransform: {fileID: 7745822430456671717}
   rearRightTireTransform: {fileID: 2649492366612654455}
@@ -897,7 +897,7 @@ MonoBehaviour:
   frontRightWheelColliderTransform: {fileID: 9163083394369686108}
   frontLeftWheelColliderTransform: {fileID: 7745822430456671717}
   frontRightTireMeshTransform: {fileID: 6570005000074900816}
-  frontLeftTireMeshTransform: {fileID: 0}
+  frontLeftTireMeshTransform: {fileID: 7745822430456671717}
   accelarationForce: 60
   brakeForce: 600
   maximalAccelarationForce: 500

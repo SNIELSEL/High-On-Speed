@@ -162,7 +162,7 @@ public class RivalAICarController : MonoBehaviour
         currentBrakeForce = brakeForce;
 
         // Check if the car is moving forward before applying brake torque
-        if (rearLeftWheelCollider.rpm > 0)
+        if (rearLeftWheelCollider.rpm > 520)
         {
             // sets brakeForce to the wheel's so the car can brake
             frontRightWheelCollider.brakeTorque = currentBrakeForce;
@@ -176,8 +176,6 @@ public class RivalAICarController : MonoBehaviour
             // If the car is not moving forward, reset brake torque
             frontRightWheelCollider.brakeTorque = 0f;
             frontLeftWheelCollider.brakeTorque = 0f;
-            rearRightWheelCollider.brakeTorque = 0f;
-            rearLeftWheelCollider.brakeTorque = 0f;
 
             // Release handbrake by setting brake force to zero
             brakeForce = 0f;
@@ -185,6 +183,8 @@ public class RivalAICarController : MonoBehaviour
 
         // Reset acceleration force to a minimum value
         accelarationForce = 60f;
+
+        Debug.Log(rearLeftWheelCollider.rpm);
     }
 
     private void GearBox()
