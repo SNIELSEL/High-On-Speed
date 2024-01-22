@@ -33,6 +33,7 @@ public class TimeAttack : MonoBehaviour
     private bool lapFinished;
     private bool firstStart;
     private bool firstLap;
+    private bool finishedTimeTrial;
 
     private float lapDecimal;
     private float bestLapDecimal;
@@ -100,8 +101,9 @@ public class TimeAttack : MonoBehaviour
             lapTimeUI.text = currentLapMinutes.ToString() + ":" + lapTime.ToString("F0") + "." + lapDecimal.ToString("F0");
         }
 
-        if(currentLap == 11)
+        if(currentLap == 11 && !finishedTimeTrial)
         {
+            finishedTimeTrial = true;
             fillInArray = true;
         }
     }
@@ -252,15 +254,10 @@ public class TimeAttack : MonoBehaviour
 
             timesFloat[emptyArrays] = convertedMinute + timesFloat[emptyArrays];
             
+            sortedFloats.Add(timesFloat[emptyArrays]);
 
-
-            if(i != currentLap)
+            if(i == currentLap)
             {
-                sortedFloats.Add(timesFloat[i]);
-            }
-            else
-            {
-                print("AAAAAAAAAAAAAAAAAAAH");
                 sortedFloats.Sort();
             }
         }
