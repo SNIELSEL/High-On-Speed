@@ -15,7 +15,7 @@ MonoBehaviour:
   TitleId: 831DC
   DeveloperSecretKey: 7TEK1YF5SDHNE4DUK1C41K5HJFW37HBDTH3SA5KDUKHCI1J7Q1
   ProductionEnvironmentUrl: 
-  RequestType: 2
+  RequestType: 0
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000

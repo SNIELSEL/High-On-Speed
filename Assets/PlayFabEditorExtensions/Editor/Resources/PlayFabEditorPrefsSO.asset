@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: niels@haverkotte.nl
-  DevAccountToken: 699b8dqojxng3q8gdqwkrzim49d3x4c79opmi1mqzi5ydpo51bobe59i3axfd3opmkwjxx3tc1o61a4tteuhcineahskesuo86ey7j7y4fqyt417krjfe1oae1e5eyjdu74p5a56m5heog949habau1ewwhnx7d7ugd7khy7pdpydzrxwh5zb7jjwwhkz9zujfwjmrm4
+  DevAccountToken: eqqf8zfxoc3s5sja4iagg5udpcqcgnguzrwyyai7rdzbx1fidtbpio5h5xuittkm7jt69gnxhu3wi897k8cyx33b19e94u7txisp14s7e4w6yzc9nprn69unzs971tpz33bo5n6gyexitqj7qom1nmdu1mj3n45s674uzr5n3mfpyqwhzxqbnaydi5zzn9d4nje5u6xa
   AadAuthorization: 
-  SelectedStudio: 
+  SelectedStudio: Civium
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 

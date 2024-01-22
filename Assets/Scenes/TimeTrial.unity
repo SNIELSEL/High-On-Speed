@@ -2041,6 +2041,7 @@ MonoBehaviour:
   multiplayer: {fileID: 507988966}
   startRace: 1
   fillInArray: 0
+  sortedFloats: []
   carController: {fileID: 0}
 --- !u!1 &161643383
 GameObject:

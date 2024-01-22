@@ -190,5 +190,4 @@ public class PlayFabManager : MonoBehaviour
     {
         currentSelectedLeaderboard = numberToSetIntsTo;
     }
-    
 }
