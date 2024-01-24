@@ -72,8 +72,7 @@ public class PlayFabManager : MonoBehaviour
         {
             playername = result.InfoResultPayload.PlayerProfile.DisplayName;
         }
-
-        if (playername == null || playername == SystemInfo.deviceUniqueIdentifier)
+        else if (playername == SystemInfo.deviceUniqueIdentifier)
         {
             ChangeName();
         }

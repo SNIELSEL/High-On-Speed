@@ -31,7 +31,7 @@ public class VideoDisabler : MonoBehaviour
         if (playVideoOnHover.onTrigger != null && triggerFloat <= 0.8f)
         {
             playVideoOnHover.onTrigger.Invoke();
-            playVideoOnHover.triggerInput.Disable();
+            playVideoOnHover.triggerInput.Enable();
         }
     }
     public void Start()
@@ -66,7 +66,10 @@ public class VideoDisabler : MonoBehaviour
     {
         for (int i = 0; i < vids.Length; i++)
         {
-            vids[i].Pause();
+            if (vids[i].gameObject.activeInHierarchy)
+            {
+                vids[i].Pause();
+            }
         }
     }
 }

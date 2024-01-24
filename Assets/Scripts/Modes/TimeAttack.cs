@@ -34,6 +34,7 @@ public class TimeAttack : MonoBehaviour
     private bool firstStart;
     private bool firstLap;
     private bool finishedTimeTrial;
+    private bool isSorted;
 
     private float lapDecimal;
     private float bestLapDecimal;
@@ -105,6 +106,13 @@ public class TimeAttack : MonoBehaviour
         {
             finishedTimeTrial = true;
             fillInArray = true;
+        }
+        if (sortedFloats.Count == 10 && !isSorted)
+        {
+            isSorted = true;
+
+            sortedFloats.Sort();
+            sortedFloats.Reverse();
         }
     }
 
@@ -253,12 +261,10 @@ public class TimeAttack : MonoBehaviour
             Loop(i);
 
             timesFloat[emptyArrays] = convertedMinute + timesFloat[emptyArrays];
-            
-            sortedFloats.Add(timesFloat[emptyArrays]);
 
-            if(i == currentLap)
+            if (timesFloat[emptyArrays] != 0)
             {
-                sortedFloats.Sort();
+                sortedFloats.Add(timesFloat[emptyArrays]);
             }
         }
     }
