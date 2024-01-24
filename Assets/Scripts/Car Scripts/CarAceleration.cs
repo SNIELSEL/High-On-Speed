@@ -7,10 +7,10 @@ public class CarAceleration : MonoBehaviour
 {
     [Header("Wheel Colliders")]
 
-    [SerializeField] WheelCollider frontRight;
-    [SerializeField] WheelCollider frontLeft;
-    [SerializeField] WheelCollider rearRight;
-    [SerializeField] WheelCollider rearLeft;
+    [SerializeField] WheelCollider frontRightWheelCollider;
+    [SerializeField] WheelCollider frontLeftWheelCollider;
+    [SerializeField] WheelCollider rearRightWheelCollider;
+    [SerializeField] WheelCollider rearLeftWheelCollider;
 
     [Header("Tire Transforms")]
 
@@ -28,8 +28,6 @@ public class CarAceleration : MonoBehaviour
     [SerializeField] private float brakeValue;
     [SerializeField] private float accelarationValue;
     [SerializeField] private float uiSpeedDevider;
-    [SerializeField] private float gearSpeedBoost;
-    [SerializeField] private float gearSpeedPenalty;
     [SerializeField] private float speedBoostDuration;
     [SerializeField] private float speedPenaltyDuration;
 
@@ -41,16 +39,13 @@ public class CarAceleration : MonoBehaviour
     [Header ("Gear Handeling")]
 
     [SerializeField] private float[] gearSpeedAmount;
-    [SerializeField] private float[] minimalGearBoostSpeedAmount;
-    [SerializeField] private float[] maximalGearBoostSpeedAmount;
 
     [SerializeField] private int gear;
     [SerializeField] private int maximalGear;
     [SerializeField] private int minimalGear;
 
     [SerializeField] private bool manualGearShifting;
-    [SerializeField] private bool automatedGearShifting;
-    [SerializeField] private bool SugestGear;
+    [SerializeField]  bool automatedGearShifting;
 
 
     [Header("Text Mesh Pro's")]
@@ -73,23 +68,6 @@ public class CarAceleration : MonoBehaviour
     {
         startTurnInput = maximalTurnAngle;
 
-        // devides the gear speed so it matchs the devided accelaration force
-        for (int i = 0; i < gearSpeedAmount.Length; i++)
-        {
-            gearSpeedAmount[i] *= uiSpeedDevider;
-        }
-
-        // devides the minimal gear speed boost amount so it matchs the devided accelaration force
-        for (int i = 0; i < minimalGearBoostSpeedAmount.Length; i++)
-        {
-            minimalGearBoostSpeedAmount[i] *= uiSpeedDevider;
-        }
-
-        // devides the maximal gear speed boost amount so it matchs the devided accelaration force
-        for (int i = 0; i < maximalGearBoostSpeedAmount.Length; i++)
-        {
-            maximalGearBoostSpeedAmount[i] *= uiSpeedDevider;
-        }
     }
 
     private void Update()
@@ -157,26 +135,26 @@ public class CarAceleration : MonoBehaviour
         currentAccelarationForce = accelarationForce * accelarationValue;
 
         // gives accelerationForce to the rear wheel's (creating rear wheel drive)
-        rearLeft.motorTorque = currentAccelarationForce;
-        rearRight.motorTorque = currentAccelarationForce; 
+        rearLeftWheelCollider.motorTorque = currentAccelarationForce;
+        rearRightWheelCollider.motorTorque = currentAccelarationForce; 
 
         // sets brakeForce to the wheel's so the car can brake
-        frontRight.brakeTorque = currentBrakeForce;
-        frontLeft.brakeTorque = currentBrakeForce;
-        rearRight.brakeTorque = currentBrakeForce;
-        rearLeft.brakeTorque = currentBrakeForce;
+        frontRightWheelCollider.brakeTorque = currentBrakeForce;
+        frontLeftWheelCollider.brakeTorque = currentBrakeForce;
+        rearRightWheelCollider.brakeTorque = currentBrakeForce;
+        rearLeftWheelCollider.brakeTorque = currentBrakeForce;
 
         /*sets the max amount of degreas the wheel's are allowed to turn
         and sets the steering to the front wheels whilest binding it to the value of your left trigger*/
         currentTurnAngle = maximalTurnAngle * turnInput;
-        frontLeft.steerAngle = currentTurnAngle;
-        frontRight.steerAngle = currentTurnAngle;
+        frontLeftWheelCollider.steerAngle = currentTurnAngle;
+        frontRightWheelCollider.steerAngle = currentTurnAngle;
 
         // makes the wheel mashes rotate and turn along side the wheel colliders
-        WheelTransform(frontRight, frontRightTireTransform);
-        WheelTransform(frontLeft, frontLeftTireTransform);
-        WheelTransform(rearRight, rearRightTireTransform);
-        WheelTransform(rearLeft, rearLeftTireTransform);
+        WheelTransform(frontRightWheelCollider, frontRightTireTransform);
+        WheelTransform(frontLeftWheelCollider, frontLeftTireTransform);
+        WheelTransform(rearRightWheelCollider, rearRightTireTransform);
+        WheelTransform(rearLeftWheelCollider, rearLeftTireTransform);
 
     }
 

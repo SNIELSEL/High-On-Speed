@@ -61,15 +61,6 @@ public class RivalAICarController : MonoBehaviour
     [SerializeField] private bool inBrakeZone;
 
 
-    [Header("Particles and sounds")]
-
-    [SerializeField] private AudioPlayer accelarationSound;
-    [SerializeField] private AudioPlayer gearSwitchSound;
-    [SerializeField] private AudioPlayer brakingSound;
-
-    [SerializeField] private GameObject gearSwitch;
-
-
     [Header("Waypoints")]
 
     [SerializeField] private GameObject[] wayPoints;
@@ -92,16 +83,15 @@ public class RivalAICarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-            Steering();
-
-        if (raceStart == true)
+        if (raceStart == true && inBrakeZone == false)
         {
             Accelaration();
+            Steering();
         }
         
         if (inBrakeZone == true)
         {
-            Deceleration(); 
+            Deceleration();
         }
 
         // makes the wheel mashes rotate and turn along side the wheel colliders
@@ -109,7 +99,6 @@ public class RivalAICarController : MonoBehaviour
         WheelTransform(frontLeftWheelCollider, frontLeftTireTransform);
         WheelTransform(rearRightWheelCollider, rearRightTireTransform);
         WheelTransform(rearLeftWheelCollider, rearLeftTireTransform);
-
     }
 
     private void OnTriggerStay(Collider brakeZone)
@@ -154,37 +143,22 @@ public class RivalAICarController : MonoBehaviour
         {
             accelarationForce += UnityEngine.Random.Range(0.5f, 1);
         }
+
+        brakeForce = 0f;
     }
 
     private void Deceleration()
     {
-        // sets the curent brake force to the same value as the brake force
         currentBrakeForce = brakeForce;
 
-        // Check if the car is moving forward before applying brake torque
-        if (rearLeftWheelCollider.rpm > 520)
-        {
-            // sets brakeForce to the wheel's so the car can brake
-            frontRightWheelCollider.brakeTorque = currentBrakeForce;
-            frontLeftWheelCollider.brakeTorque = currentBrakeForce;
-            rearRightWheelCollider.brakeTorque = currentBrakeForce;
-            rearLeftWheelCollider.brakeTorque = currentBrakeForce;
-        }
+        // sets brakeForce to the wheel's so the car can brake
+        frontRightWheelCollider.brakeTorque = currentBrakeForce;
+        frontLeftWheelCollider.brakeTorque = currentBrakeForce;
+        rearRightWheelCollider.brakeTorque = currentBrakeForce;
+        rearLeftWheelCollider.brakeTorque = currentBrakeForce;
 
-        else
-        {
-            // If the car is not moving forward, reset brake torque
-            frontRightWheelCollider.brakeTorque = 0f;
-            frontLeftWheelCollider.brakeTorque = 0f;
 
-            // Release handbrake by setting brake force to zero
-            brakeForce = 0f;
-        }
-
-        // Reset acceleration force to a minimum value
-        accelarationForce = 60f;
-
-        Debug.Log(rearLeftWheelCollider.rpm);
+        accelarationForce = 100f;
     }
 
     private void GearBox()

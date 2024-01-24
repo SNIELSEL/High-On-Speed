@@ -5,18 +5,18 @@ using UnityEngine;
 public class LapManager : MonoBehaviour
 {
     [SerializeField] private int currentLap;
-    [SerializeField] private int maxLap;
+    [SerializeField] private int maximalLap;
 
     [SerializeField] private bool raceFinished;
 
     private void OnTriggerEnter(Collider finishLine)
     {
-        if (currentLap < maxLap)
+        if (currentLap < maximalLap)
         {
             currentLap ++;
         }
 
-        if (currentLap == maxLap)
+        if (currentLap == maximalLap)
         {
             raceFinished = true;
         }
