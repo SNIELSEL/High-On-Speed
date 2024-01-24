@@ -40,6 +40,7 @@ public class RivalAICarController : MonoBehaviour
 
     [SerializeField] private float accelarationForce;
     [SerializeField] private float brakeForce;
+    [SerializeField] private float maximalBrakeForce;
     [SerializeField] private float maximalAccelarationForce;
 
     private float currentAccelarationForce = 0f;
@@ -65,8 +66,8 @@ public class RivalAICarController : MonoBehaviour
 
     [SerializeField] private GameObject[] wayPoints;
     [SerializeField] private int currentWayPoint;
+    [SerializeField] private int nextWaypoint;
 
-            
     private Vector3 wheelPosition;
     private Quaternion wheelRotation;
 
@@ -74,6 +75,8 @@ public class RivalAICarController : MonoBehaviour
     {
         raceStart = false;
         inBrakeZone = false;
+
+        StartCoroutine(TimerCheck());
     }
 
     private void Update()
@@ -83,6 +86,13 @@ public class RivalAICarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (raceStart == true)
+        {
+            SafeCurrentWayPoint();
+
+            AiTeleporter();
+        }
+
         if (raceStart == true && inBrakeZone == false)
         {
             Accelaration();
@@ -92,6 +102,7 @@ public class RivalAICarController : MonoBehaviour
         if (inBrakeZone == true)
         {
             Deceleration();
+            Debug.Log(brakeForce);
         }
 
         // makes the wheel mashes rotate and turn along side the wheel colliders
@@ -131,34 +142,43 @@ public class RivalAICarController : MonoBehaviour
 
     private void Accelaration()
     {
-        // sets the curent accalaration force to the same value as the accelaration force
+        // sets the current acceleration force to the same value as the acceleration force
         currentAccelarationForce = accelarationForce;
 
-        // gives accelerationForce to the rear wheel's (creating rear wheel drive)
+        // gives acceleration force to the rear wheels (creating rear-wheel drive)
         rearLeftWheelCollider.motorTorque = currentAccelarationForce;
         rearRightWheelCollider.motorTorque = currentAccelarationForce;
 
-        // makes it so that when the car needs to accelarate it dous so in a range of 0.5 to 1
+        // makes it so that when the car needs to accelerate it does so in a range of 0.5 to 1
         if (accelarationForce >= 0 && accelarationForce <= maximalAccelarationForce && inBrakeZone == false)
         {
             accelarationForce += UnityEngine.Random.Range(0.5f, 1);
         }
 
-        brakeForce = 0f;
+        if (inBrakeZone == false)
+        {
+            // Reset brake torque after braking
+            currentBrakeForce = 0f;
+            frontRightWheelCollider.brakeTorque = 0f;
+            frontLeftWheelCollider.brakeTorque = 0f;
+            rearRightWheelCollider.brakeTorque = 0f;
+            rearLeftWheelCollider.brakeTorque = 0f;
+        }
     }
 
     private void Deceleration()
     {
         currentBrakeForce = brakeForce;
 
-        // sets brakeForce to the wheel's so the car can brake
+        // sets brake force to the wheel's so the car can brake
         frontRightWheelCollider.brakeTorque = currentBrakeForce;
         frontLeftWheelCollider.brakeTorque = currentBrakeForce;
         rearRightWheelCollider.brakeTorque = currentBrakeForce;
         rearLeftWheelCollider.brakeTorque = currentBrakeForce;
 
-
-        accelarationForce = 100f;
+        // Reset motor torque after braking
+        rearLeftWheelCollider.motorTorque = 0f;
+        rearRightWheelCollider.motorTorque = 0f;
     }
 
     private void GearBox()
@@ -201,4 +221,29 @@ public class RivalAICarController : MonoBehaviour
         frontRightWheelCollider.steerAngle = targetSteeringAngle;
         frontLeftWheelCollider.steerAngle = targetSteeringAngle;
     }
+
+    private void SafeCurrentWayPoint()
+    {
+        PlayerPrefs.SetInt("wayPoint", currentWayPoint);
+    }
+
+    private void AiTeleporter()
+    {
+        nextWaypoint = currentWayPoint + 1;
+    }
+
+    private IEnumerator TimerCheck()
+    {
+        yield return new WaitForSeconds(180);
+
+        if ( PlayerPrefs.GetInt("wayPoint") == currentWayPoint)
+        {
+            transform.position = wayPoints[nextWaypoint].transform.position;
+
+            currentWayPoint = nextWaypoint;
+        }
+
+        StartCoroutine(TimerCheck());
+    }
+
 }
