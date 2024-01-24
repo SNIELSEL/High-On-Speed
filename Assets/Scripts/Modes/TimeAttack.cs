@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,7 +27,7 @@ public class TimeAttack : MonoBehaviour
     [SerializeField] private PlayFabManager multiplayer;
 
     [Header("Debugging")]
-    [SerializeField] private bool startRace;
+                     public bool startRace;
     [SerializeField] private bool fillInArray;
 
     private bool lapStarted;
@@ -35,6 +36,7 @@ public class TimeAttack : MonoBehaviour
     private bool firstLap;
     private bool finishedTimeTrial;
     private bool isSorted;
+    private bool ondelay;
 
     private float lapDecimal;
     private float bestLapDecimal;
@@ -69,6 +71,13 @@ public class TimeAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (startRace)
+        {
+            startRace = false;
+            firstStart = false;
+            lapStarted = true;
+        }
+
         if (fillInArray)
         {
             fillInArray = false;
@@ -132,6 +141,12 @@ public class TimeAttack : MonoBehaviour
         }
     }
 
+    public void FinishTimeTrial()
+    {
+        finishedTimeTrial = true;
+        fillInArray = true;
+    }
+
     // gets called every time you enter a trigger
     private void OnTriggerEnter(Collider enter)
     {
@@ -153,8 +168,10 @@ public class TimeAttack : MonoBehaviour
     private void OnTriggerExit(Collider exit)
     {
         // ends the last lap so the timer can restart
-        if (exit.tag == ("StartFinish") && !firstLap)
+        if (exit.tag == ("StartFinish") && !firstLap && gameObject.tag == "Car" &&!ondelay)
         {
+            StartCoroutine(FiveSecondDelay());
+            ondelay = true;
             lapFinished = false;
             lapStarted = true;
 
@@ -165,6 +182,11 @@ public class TimeAttack : MonoBehaviour
         }
 
         Timer();
+    }
+    private IEnumerator FiveSecondDelay()
+    {
+        yield return new WaitForSeconds(5);
+        ondelay = false;
     }
 
     public void ConvertSecondToMinutes()

@@ -9,6 +9,7 @@ public class MenuEnabler : MonoBehaviour
 
     public GameObject Menu;
     public InputAction menuInput;
+    private TimeAttack timeAttack;
 
     public void Start()
     {
@@ -32,5 +33,12 @@ public class MenuEnabler : MonoBehaviour
         {
             Menu.SetActive(true);
         }
+    }
+
+    public void GetTimeAttackAndFinishRace()
+    {
+        timeAttack = GameObject.FindGameObjectWithTag("Car").GetComponent<TimeAttack>();
+
+        timeAttack.FinishTimeTrial();
     }
 }
