@@ -6,15 +6,17 @@ using UnityEngine.UI;
 public class CountDown : MonoBehaviour
 {
     public GameObject[] images;
-    public AudioSource auioPlayer;
+    public AudioSource audioPlayer;
     private float randomStartTime;
 
-    public RivalAICarController controller;
+    public TimeAttack timer;
+    public GameObject Car;
     public bool beginCountDown;
     public void Update()
     {
         if (beginCountDown)
         {
+            beginCountDown = false;
             StartCountDown();
         }
     }
@@ -43,7 +45,8 @@ public class CountDown : MonoBehaviour
         images[7].SetActive(true);
         images[0].SetActive(true);
         yield return new WaitForSeconds(1);
-        auioPlayer.Play();
+        audioPlayer.Play();
+        Debug.Log("hi");
         yield return new WaitForSeconds(1);
         DisableImages();
         images[1].SetActive(true);
@@ -62,7 +65,8 @@ public class CountDown : MonoBehaviour
         yield return new WaitForSeconds(randomStartTime);
         DisableImages();
         images[6].SetActive(true);
-        controller.raceStart = true;
+        Car.GetComponent<CarAceleration>().enabled = true;
+        timer.startRace = true;
         yield return new WaitForSeconds(4);
         images[7].SetActive(false);
         DisableImages();

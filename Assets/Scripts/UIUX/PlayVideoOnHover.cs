@@ -54,11 +54,11 @@ public class PlayVideoOnHover : MonoBehaviour
     public void ToggleMenu()
     {
         triggerInput.Enable();
-        triggerInput.performed -= videoDisabler.ToggleMenu;
+        triggerInput.performed += videoDisabler.ToggleMenu;
     }
 
     public void OnDisable()
     {
-        triggerInput.performed -= videoDisabler.ToggleMenu;
+        triggerInput.performed += videoDisabler.ToggleMenu;
     }
 }

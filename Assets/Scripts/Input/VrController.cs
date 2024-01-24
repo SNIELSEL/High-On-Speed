@@ -71,6 +71,15 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""9339f34f-67f2-4936-a91e-8b9d8f802753"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,17 @@ public partial class @VrController: IInputActionCollection2, IDisposable
                     ""action"": ""GearBox Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8dd86a0d-5cf5-4ec6-880d-869253c873f7"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -196,6 +216,7 @@ public partial class @VrController: IInputActionCollection2, IDisposable
         m_Controller_GearBoxUp = m_Controller.FindAction("GearBox Up", throwIfNotFound: true);
         m_Controller_GearBoxDown = m_Controller.FindAction("GearBox Down", throwIfNotFound: true);
         m_Controller_Steering = m_Controller.FindAction("Steering", throwIfNotFound: true);
+        m_Controller_A = m_Controller.FindAction("A", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +283,7 @@ public partial class @VrController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Controller_GearBoxUp;
     private readonly InputAction m_Controller_GearBoxDown;
     private readonly InputAction m_Controller_Steering;
+    private readonly InputAction m_Controller_A;
     public struct ControllerActions
     {
         private @VrController m_Wrapper;
@@ -271,6 +293,7 @@ public partial class @VrController: IInputActionCollection2, IDisposable
         public InputAction @GearBoxUp => m_Wrapper.m_Controller_GearBoxUp;
         public InputAction @GearBoxDown => m_Wrapper.m_Controller_GearBoxDown;
         public InputAction @Steering => m_Wrapper.m_Controller_Steering;
+        public InputAction @A => m_Wrapper.m_Controller_A;
         public InputActionMap Get() { return m_Wrapper.m_Controller; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -295,6 +318,9 @@ public partial class @VrController: IInputActionCollection2, IDisposable
             @Steering.started += instance.OnSteering;
             @Steering.performed += instance.OnSteering;
             @Steering.canceled += instance.OnSteering;
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
         }
 
         private void UnregisterCallbacks(IControllerActions instance)
@@ -314,6 +340,9 @@ public partial class @VrController: IInputActionCollection2, IDisposable
             @Steering.started -= instance.OnSteering;
             @Steering.performed -= instance.OnSteering;
             @Steering.canceled -= instance.OnSteering;
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
         }
 
         public void RemoveCallbacks(IControllerActions instance)
@@ -338,5 +367,6 @@ public partial class @VrController: IInputActionCollection2, IDisposable
         void OnGearBoxUp(InputAction.CallbackContext context);
         void OnGearBoxDown(InputAction.CallbackContext context);
         void OnSteering(InputAction.CallbackContext context);
+        void OnA(InputAction.CallbackContext context);
     }
 }
