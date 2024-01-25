@@ -71,8 +71,15 @@ public class RivalAICarController : MonoBehaviour
     private Vector3 wheelPosition;
     private Quaternion wheelRotation;
 
+    public IEnumerator Delayer()
+    {
+        yield return new WaitForSeconds(10);
+        raceStart = true;
+    }
+
     private void Start()
     {
+        StartCoroutine(Delayer());
         raceStart = false;
         inBrakeZone = false;
 

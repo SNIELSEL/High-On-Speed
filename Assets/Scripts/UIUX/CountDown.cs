@@ -45,7 +45,10 @@ public class CountDown : MonoBehaviour
         images[7].SetActive(true);
         images[0].SetActive(true);
         yield return new WaitForSeconds(1);
-        audioPlayer.Play();
+        if(audioPlayer != null)
+        {
+            audioPlayer.Play();
+        }
         Debug.Log("hi");
         yield return new WaitForSeconds(1);
         DisableImages();
@@ -66,7 +69,15 @@ public class CountDown : MonoBehaviour
         DisableImages();
         images[6].SetActive(true);
         Car.GetComponent<CarAceleration>().enabled = true;
-        timer.startRace = true;
+        if(timer != null)
+        {
+            timer.startRace = true;
+        }
+
+        if (GetComponent<StartRacing>())
+        {
+            GetComponent<StartRacing>().Begin();
+        }
         yield return new WaitForSeconds(4);
         images[7].SetActive(false);
         DisableImages();
