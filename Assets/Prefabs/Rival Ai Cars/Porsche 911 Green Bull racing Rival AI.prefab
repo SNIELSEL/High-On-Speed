@@ -493,6 +493,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 581510583846622790}
   - {fileID: 1172067651710465759}
   - {fileID: 8990677859378033880}
   - {fileID: 1328312582561965873}
@@ -628,6 +629,7 @@ MonoBehaviour:
   frontLeftTireMeshTransform: {fileID: 0}
   accelarationForce: 60
   brakeForce: 600
+  maximalBrakeForce: 0
   maximalAccelarationForce: 500
   gearSpeedAmount:
   - 60
@@ -641,10 +643,6 @@ MonoBehaviour:
   minimalGear: 0
   raceStart: 0
   inBrakeZone: 0
-  accelarationSound: {fileID: 0}
-  gearSwitchSound: {fileID: 0}
-  brakingSound: {fileID: 0}
-  gearSwitch: {fileID: 0}
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -742,6 +740,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentWayPoint: 1
+  nextWaypoint: 0
 --- !u!1 &4788310519997572912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,3 +1167,92 @@ Transform:
   - {fileID: 3010554021969709334}
   m_Father: {fileID: 597466441504067656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1124573582185443757
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 597466441504067656}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.8389865
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8767847
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.810073
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.45922917
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5376882
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.45922914
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5376882
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: -1431290989140328653, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 961fe0eefa3ab4a46844e78b78f8a8b5, type: 2}
+    - target: {fileID: 919132149155446097, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+        type: 3}
+      propertyPath: m_Name
+      value: Cureur zit (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c5c40dd7af35cbc47933a22f34e2c65f, type: 3}
+--- !u!4 &581510583846622790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5c40dd7af35cbc47933a22f34e2c65f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124573582185443757}
+  m_PrefabAsset: {fileID: 0}

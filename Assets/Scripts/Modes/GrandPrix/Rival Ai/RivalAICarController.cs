@@ -86,11 +86,24 @@ public class RivalAICarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //runs the code in the voids if the race starts
         if (raceStart == true)
         {
             SafeCurrentWayPoint();
 
             AiTeleporter();
+        }
+
+        //makes it so the car wont bottem out in the brakeing zone
+        if (inBrakeZone == true)
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationY;
+        }
+
+        //makes it zo that if The AI leave's the breaking zone the cars rotation isnt locked anymore
+        else
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
 
         if (raceStart == true && inBrakeZone == false)
@@ -179,6 +192,7 @@ public class RivalAICarController : MonoBehaviour
         // Reset motor torque after braking
         rearLeftWheelCollider.motorTorque = 0f;
         rearRightWheelCollider.motorTorque = 0f;
+
     }
 
     private void GearBox()
@@ -234,7 +248,7 @@ public class RivalAICarController : MonoBehaviour
 
     private IEnumerator TimerCheck()
     {
-        yield return new WaitForSeconds(180);
+        yield return new WaitForSeconds(240);
 
         if ( PlayerPrefs.GetInt("wayPoint") == currentWayPoint)
         {
