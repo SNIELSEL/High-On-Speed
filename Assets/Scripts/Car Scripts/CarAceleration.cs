@@ -53,6 +53,12 @@ public class CarAceleration : MonoBehaviour
     [SerializeField] private TextMeshProUGUI showGear;
     [SerializeField] private TextMeshProUGUI showSpeed;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource engineSound;
+    [SerializeField] private AudioSource brakeAudio;
+    [SerializeField] private AudioSource gearSwitch;
+    [SerializeField] private AudioSource gearSwitch2;
+
     private float currentAccelarationForce = 0f;
     private float currentBrakeForce = 0f;
     private float convertedAccelarationForce;
@@ -60,6 +66,8 @@ public class CarAceleration : MonoBehaviour
     private float currentTurnAngle = 0f;
     private float startTurnInput;
     public float steeringSpeedDivider;
+
+    private bool FirstAudioCheck;
 
     private Vector3 wheelPosition;
     private Quaternion wheelRotation;
@@ -86,7 +94,7 @@ public class CarAceleration : MonoBehaviour
 
         // Coppeling gears's and speed to UI elements
         showGear.text = gear.ToString();
-        showSpeed.text = convertedAccelarationForce.ToString();
+        showSpeed.text = (GetComponent<Rigidbody>().velocity.magnitude * 3.6).ToString("F1");
 
         // runs the code in void AutomatedGearbox
         AutomatedGearbox();
@@ -97,7 +105,14 @@ public class CarAceleration : MonoBehaviour
         // increses the speed when you hold the gas paddel
         if (accelarationValue != 0 && accelarationForce <= maximalAccelarationForce)
         {
-            accelarationForce += speedMultiplier * accelarationValue;
+            if(GetComponent<Rigidbody>().velocity.magnitude * 3.6 <= 30)
+            {
+                accelarationForce += (speedMultiplier * accelarationValue) * 5000;
+            }
+            else
+            {
+                accelarationForce += speedMultiplier * accelarationValue;
+            }
         }
 
         // makes the car lose speed when you dont accelarate
@@ -206,6 +221,16 @@ public class CarAceleration : MonoBehaviour
     {
         if (manualGearShifting == true && gear <= maximalGear)
         {
+            if (!gearSwitch.isPlaying)
+            {
+                gearSwitch.Play();
+            }
+
+            if (!gearSwitch2.isPlaying)
+            {
+                gearSwitch2.Play();
+            }
+
             gear += 1;
         }
     }
@@ -216,6 +241,16 @@ public class CarAceleration : MonoBehaviour
         // lets you shift down gear
         if (manualGearShifting == true && gear > minimalGear)
         {
+            if (!gearSwitch.isPlaying)
+            {
+                gearSwitch.Play();
+            }
+
+            if (!gearSwitch2.isPlaying)
+            {
+                gearSwitch2.Play();
+            }
+
             gear -= 1;
         }
     }
@@ -223,12 +258,44 @@ public class CarAceleration : MonoBehaviour
     // gives the value of how far the right trigger has been pressed
     private void OnGas(InputValue accelaration)
     {
+        engineSound.volume = accelaration.Get<float>();
+
+        if (engineSound.isPlaying && !FirstAudioCheck)
+        {
+            FirstAudioCheck = true;
+            engineSound.Play();
+        }
+        else
+        {
+            engineSound.UnPause();
+        }
+
+        if(accelaration.Get<float>() != 0 && !FirstAudioCheck)
+        {
+            FirstAudioCheck = true;
+            engineSound.Play();
+        }
+        else if (accelaration.Get<float>() != 0)
+        {
+            engineSound.Play();
+        }
+
+        if(accelaration.Get<float>() == 0)
+        {
+            engineSound.Stop();
+        }
+
         accelarationValue = accelaration.Get<float>();
     }
 
     // gives the value of how far the left trigger has been pressed
     private void OnBrake(InputValue brake)
     {
+        if (!brakeAudio.isPlaying)
+        {
+            brakeAudio.Play();
+        }
+
         brakeValue = brake.Get<float>();
     }
 

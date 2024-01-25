@@ -54,7 +54,7 @@ public class PlayFabManager : MonoBehaviour
     {
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = customPlayerID,
+            CustomId = SystemInfo.deviceUniqueIdentifier,
             CreateAccount = true,
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
             {
@@ -72,11 +72,8 @@ public class PlayFabManager : MonoBehaviour
         {
             playername = result.InfoResultPayload.PlayerProfile.DisplayName;
         }
-        else if (playername == SystemInfo.deviceUniqueIdentifier)
-        {
-            ChangeName();
-        }
-        else if (UnityEngine.XR.XRSettings.enabled && result.InfoResultPayload.PlayerProfile.DisplayName != Oculus.Platform.Users.GetLoggedInUser().ToString())
+
+        if (UnityEngine.XR.XRSettings.enabled && result.InfoResultPayload.PlayerProfile.DisplayName != Oculus.Platform.Users.GetLoggedInUser().ToString())
         {
             ChangeName();
         }
